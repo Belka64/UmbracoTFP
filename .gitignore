@@ -1,0 +1,6 @@
+**/*.suo
+*.sln.DotSettings.user
+/packages
+**/*.user
+
+/App_Data/*
