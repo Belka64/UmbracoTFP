@@ -1,0 +1,61 @@
+﻿@{
+    var ancestors = GetAncestors();
+    var menuRoot = ancestors.First();
+    var rootChildren = getChildren(menuRoot);
+}
+
+@if (rootChildren.Any())
+{
+    <nav class="sub-nav">
+        <ul>
+            @renderMenuSection(rootChildren, ancestors, DocumentContext.CurrentDocument)
+        </ul>
+    </nav>
+}
+
+
+@helper renderMenuSection(IEnumerable<TreeNode> items, IEnumerable<TreeNode> ancestors, TreeNode currentItem)
+{
+foreach (var i in items)
+{
+        <li>
+            <a title="@i["MenuTitle"]" href="@i.AbsoluteURL" class="@(i.NodeGUID == currentItem.NodeGUID ? "activeItem" : null)">@i["MenuTitle"]</a>
+            @if (i.NodeHasChildren && ancestors.Any(a => a.NodeGUID == i.NodeGUID))
+            {
+                <ul class="subMenu">
+                    @renderMenuSection(getChildren(i), ancestors, currentItem)
+                </ul>
+            }
+        </li>
+
+}
+}
+
+@functions {
+    public static IEnumerable<TreeNode> getChildren(TreeNode root)
+    {
+        return DocumentHelper.GetDocuments()
+                             .Types("tfp.threecolumnspage", "tfp.twocolumnspage", "tfp.audresourcecenterpage")
+                             .OnSite("TFP")
+                             .Path(root.NodeAliasPath + "/%")
+                             .NestingLevel(1)
+                             .WithCoupledColumns()
+                             .Columns("MenuTitle", "NodeAliasPath", "NodeGUID", "NodeHasChildren", "DocumentUrlPath")
+                             .WhereTrue("ShowInMenues")
+                             .WhereNotEmpty("MenuTitle")
+                             .OrderBy("NodeOrder").ToList();
+    }
+
+    public static List<TreeNode> GetAncestors()
+    {
+        var result = new List<TreeNode>(8);
+        var node = DocumentContext.CurrentDocument;
+        while (node != null && node.ClassName != "CMS.Root")
+        {
+            result.Insert(0, node);
+            node = node.Parent;
+        }
+
+        return result;
+    }
+}

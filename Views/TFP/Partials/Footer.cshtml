@@ -1,0 +1,9 @@
+﻿@using CMS.Mvc.Core
+@using CMS.DataEngine
+@{var doc = DocumentHelper.GetDocument(PageGuids.TFPFooter, new TreeProvider());}
+@if (doc != null)
+{
+    <footer id="footer">
+        @Html.Raw(doc.GetValue("Text", ""))
+    </footer>
+}

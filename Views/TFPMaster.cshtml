@@ -1,4 +1,27 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
-@{
-    Layout = null;
-}
+﻿@inherits WebViewPage
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 " />
+    <meta name="msvalidate.01" content="6849DC9B0C4F8D128EE873F68FD0E081" />
+    <link href="~/css/main.css" media="screen, projection" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/x-icon" href="~/images/TFP/favicon.ico">
+    <script type="text/javascript" src="~/scripts/baron.js"></script>
+    <script type="text/javascript" src="~/scripts/general.js"></script>
+</head>
+<body>
+    <header id="header">
+        <nav class="main container">
+            <a href="/" class="logo"><img src="~/images/TFP/logo.png" alt="TUFTS HEALTH FREEDOM" /></a>
+            @Html.Partial("~/Views/Partials/TopMenu.cshtml")
+        </nav>
+        @Html.Partial("~/Views/Partials/NavBarPartial.cshtml")
+    </header>
+				
+   @RenderBody()
+			
+@Html.Partial("~/Views/Partials/Footer.cshtml")
+</body>
+</html>

@@ -2,3 +2,23 @@
 @{
     Layout = "TFPMaster.cshtml";
 }
+
+<div class="w1">
+    <div class="w2">
+        <div class="container-3-col">
+	@Html.Partial("~/Views/Partials/LeftMenuPartial.cshtml")
+            <div class="w3">
+                <div class="content-holder">
+                    @Html.Partial("~/Views/Partials/Breadcrumb.cshtml")
+                    <div id="content">
+                        <h1 class="page-title">@CurrentPage.Title</h1>
+                        <h2 class="page-subtitle">@CurrentPage.Subtitle</h2>
+                        @Html.Raw(CurrentPage.Text)
+							
+                    </div>
+                </div>
+							@Html.Partial("~/Views/Partials/RightSpots.cshtml")
+            </div>
+        </div>
+    </div>
+</div>

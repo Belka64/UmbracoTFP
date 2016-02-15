@@ -1,0 +1,18 @@
+﻿@inherits UmbracoTemplatePage
+@{var homeNode = Umbraco.TypedContent(1065);
+var documents = homeNode.Descendants("SectionPage").Where("showInMenues");}
+<nav id="nav">
+    <div class="nav-holder">
+        <ul class="root">
+			<li>
+                <a href="@homeNode.Url">@homeNode["menuTitle"]</a>
+            </li>
+            @foreach (var page in documents)
+            {
+                <li>
+                    <a href="@page.Url">@page["menuTitle"]</a>
+                </li>
+            }
+        </ul>
+    </div>
+</nav>

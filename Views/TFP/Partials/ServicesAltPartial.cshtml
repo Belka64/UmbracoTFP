@@ -1,0 +1,16 @@
+﻿@using CMS.Mvc.Core
+@using CMS.DataEngine
+@{var doc = DocumentHelper.GetDocument(PageGuids.ServicesAlt, new TreeProvider());}
+@if (doc != null)
+{
+    <section class="services-alt">
+        <div class="container">
+            <div class="image">
+                @doc.GetImageAttachment("Image", new { alt = "services" })
+            </div>
+            <div class="text-holder">
+                @Html.Raw(doc.GetValue("Text", ""))
+            </div>
+        </div>
+    </section>
+}

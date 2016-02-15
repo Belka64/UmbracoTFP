@@ -1,0 +1,23 @@
+﻿@{var serSpots = DocumentContext.CurrentDocument.GetNodesFromMultiList("ServicesSpots");}
+
+@if (serSpots.Any())
+{
+    <section class="purpleSection">
+        <div class="container">
+            @foreach (var spot in serSpots)
+            {
+                <div class="teaser">
+                    <div class="ico">@spot.GetImageAttachment("Image", new { alt = spot.GetValue("Copyright") })</div>
+                    <div class="holderText">
+                        <p class="title">@spot.GetValue("Title", "")</p>
+                        <p>
+                            @Html.Raw(spot.GetValue("Text"))
+                        </p>
+                    </div>
+                    @Helpers.GetDocumentLink(spot.GetValue("Link1Url", ""), spot.GetValue("LinkText1").ToString(), null)
+                </div>
+            }
+        </div>
+    </section>
+}
+

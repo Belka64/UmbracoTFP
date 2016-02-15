@@ -1,0 +1,32 @@
+﻿@inherits UmbracoTemplatePage	
+
+@{
+var rootNode = Model.Content.AncestorsOrSelf("SectionPage");
+var anc = Model.Content.AncestorsOrSelf();
+}
+
+@if(rootNode.Any() && anc.Any())
+{
+<nav class="sub-nav">
+     <ul>
+      	@renderMenu(rootNode.First().Children.Where("showInMenues"), anc)
+     </ul>
+</nav>
+}	  
+
+@helper renderMenu(IEnumerable<IPublishedContent> page, IEnumerable<IPublishedContent> ancestors)
+{
+	foreach(var i in page)
+	{
+		<li>
+			<a title="@i["menuTitle"]" class="@(i.Id == CurrentPage.Id ? "activeItem" : null)" href="@i.Url">@i["menuTitle"]</a>
+			@if (i.Children.Count() > 0 && ancestors.Any(x => x.Id == i.Id))
+            {
+            	<ul class="subMenu">
+					
+            		@renderMenu(i.Children.Where("showInMenues"), ancestors)
+            	</ul>
+            }
+		</li>
+	}
+}

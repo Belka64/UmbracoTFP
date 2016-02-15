@@ -1,0 +1,14 @@
+﻿@inherits UmbracoTemplatePage
+	
+@{ var selection = CurrentPage.Ancestors(); }
+
+@if (selection.Any())
+{
+    <ul id="breadcrumbs">
+        @foreach (var i in selection.OrderBy("Level"))
+        {
+            <a title="@i.Name" href="@i.Url">@i.Name > </a>
+        }
+        <span>@CurrentPage.Name</span>
+    </ul>
+}

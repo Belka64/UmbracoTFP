@@ -1,0 +1,13 @@
+﻿@model Google.Apis.Customsearch.v1.Data.Search
+
+@if (Model != null && Model.Items != null && Model.Items.Any())
+{
+    foreach (var r in Model.Items)
+    {
+        <div class="textItem">
+            <h2><a href="@r.Link">@Html.Raw(r.HtmlTitle)</a></h2>
+            <p>@Html.Raw(r.HtmlSnippet)</p>
+        </div>
+
+    }
+}

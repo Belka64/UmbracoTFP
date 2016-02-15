@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Document>
+@using Lucene.Net.Documents;
+
+@if (Model.Any())
+{
+    foreach (var res in Model)
+    {
+        <div class="spot">
+            <div class="textBox">
+                <p class="titleBox">
+                    <a href="@res.Get("documentlink")" title="@res.Get("title")" target="_blank">@res.Get("title")</a>
+                </p>
+                <p>@Html.Raw(res.Get("shortdescription"))</p>
+            </div>
+            @if (res.Get("justapage") != "true")
+            {
+                <a href="@res.Get("documentlink")" title="View/Download" class="pdfLink" target="_blank">View/Download</a>
+            }
+            @if (!string.IsNullOrEmpty(res.Get("subcat")))
+            {
+                <p class="keywolds">
+                    <b>Subcategories:</b>
+                    @res.Get("subcat")
+                </p>
+            }
+        </div>
+    }
+}

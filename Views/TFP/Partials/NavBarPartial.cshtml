@@ -1,0 +1,18 @@
+﻿@inherits UmbracoTemplatePage
+@{var homeNode = Umbraco.Content(1065);
+var documents = homeNode.Descendants("SectionPage");}
+<nav id="nav">
+    <div class="nav-holder">
+        <ul class="root">
+			<li>
+                <a href="@homeNode.Url">@homeNode.Name</a>
+            </li>
+            @foreach (var page in documents)
+            {
+                <li>
+                    <a href="@page.Url">@page.Name</a>
+                </li>
+            }
+        </ul>
+    </div>
+</nav>

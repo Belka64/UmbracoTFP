@@ -1,0 +1,44 @@
+﻿@{ var loginItem = Helpers.GetNode(new Guid("0101359f-8b4a-48f8-a939-ad18e0231377"), "TFP");}
+<div class="login">
+    @{var login = Helpers.GetNode(new Guid("f6799979-2719-4472-83be-0f2d30e79700"), "TFP");}
+    <a href="javascript:void(0)" title="Login" id="login">Login</a>
+    <div class="loginHolder">
+        <span>Account Login</span>
+        <div class="selectHolder">
+            <input type="text" id="loginProfile" spellcheck="false" placeholder="I am a ..." value="" />
+            <a class="navigation" href="javascript:void(0)" title=""></a>
+            <div class="holderList">
+                <div class="holderSkin">
+                    <div class="listItems">
+                        <ul class="scroller scrollerHeight">
+                            <li id="title_1">Broker</li>
+                            <li id="title_2">Member</li>
+                            <li id="title_3">Employer</li>
+                            <li id="title_4">Provider</li>
+                        </ul>
+                        <div class="scroller__track">
+                            <!-- Track is optional -->
+                            <div class="scroller__bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="contentLog_1">
+            <a class="greenButton" href="@loginItem["BrokersLoginLink"]" title="@loginItem["BrokersLoginText"]">@loginItem["BrokersLoginText"]</a>
+            <a href="@loginItem["BrkRegForAccLink"]" title="@loginItem["BrkRegForAccText"]">@loginItem["BrkRegForAccText"]</a>
+        </div>
+        <div id="contentLog_2">
+            <a class="greenButton" href="@loginItem["MembersLoginLink"]" title="@loginItem["MembersLoginText"]">@loginItem["MembersLoginText"]</a>
+            <a href="@loginItem["MemRegForAccLink"]" title="@loginItem["MemRegForAccText"]">@loginItem["MemRegForAccText"]</a>
+        </div>
+        <div id="contentLog_3">
+            <a class="greenButton" href="@loginItem["EmployersLoginLink"]" title="@loginItem["EmployersLoginText"]">@loginItem["EmployersLoginText"]</a>
+            <a href="@loginItem["EmpRegForAccLink"]" title="@loginItem["EmpRegForAccText"]">@loginItem["EmpRegForAccText"]</a>
+        </div>
+        <div id="contentLog_4">
+            <a class="greenButton" href="@loginItem["ProvidersLoginLink"]" title="@loginItem["ProvidersLoginText"]">@loginItem["ProvidersLoginText"]</a>
+            <a href="@loginItem["PrvRegForAccLink"]" title="@loginItem["PrvRegForAccText"]">@loginItem["PrvRegForAccText"]</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+﻿@{var plans = DocumentHelper.GetDocuments("tfp.plan").Path().OnSite("TFP").Published().PublishedVersion();}
+<div class="plansNavigator">
+    @if(plans.Any())
+    {
+        foreach (var plan in plans)
+        {
+            <div class="spot @plan.GetValue("PlanStyle", "")">
+                <div class="textBox">
+                    <p class="titleBox"><a href="@plan.AbsoluteURL" title="@plan.NodeName">@plan.NodeName</a></p>
+                    @Html.Raw(plan.GetValue("ShortDescription", ""))
+                </div>
+                <a class="learnMore" href="@plan.AbsoluteURL" title="Learn More">Learn More</a>
+            </div>
+        }
+    }
+</div>

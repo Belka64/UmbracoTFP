@@ -1,0 +1,56 @@
+﻿@inherits UmbracoTemplatePage
+@*@{
+    var getAncestors = new Func<List<TreeNode>>(() =>
+    {
+        var result = new List<TreeNode>();
+        var node = DocumentContext.CurrentDocument;
+        while (node != null && node.ClassName != "CMS.Root")
+        {
+            result.Insert(0, node);
+            node = node.Parent;
+        }
+        
+        return result;
+    });
+    
+    var ancestors = getAncestors();
+}
+
+<ul id="breadcrumbs">
+    <li>
+        <a title="Home" href="/">Home</a>
+    </li>
+    @for (int i = 0; i < ancestors.Count; i++)
+    {
+        var n = ancestors[i];
+        var menuTitle = n.GetValue("MenuTitle", "");
+        <li>
+            @if (i == ancestors.Count - 1)
+            {
+                <span>@menuTitle</span>
+            }
+            else
+            {
+                <a title="@menuTitle" href="@n.AbsoluteURL">@menuTitle</a>
+            }
+        </li>
+    }
+</ul>*@
+
+<ul id="breadcrumbs">
+    @{var bc = Model.Content.Path.Split(',').Where(z=>z != "-1").Select(x => Umbraco.TypedContent(x)).ToList();}
+
+<li>
+    @foreach (var i in bc)
+    {
+        if (i == bc.First())
+        {
+            <span>@i.Name</span>
+        }
+        else
+        {
+            <a title="@i.Name" href="@i.Url">@i.Name</a>
+        }
+    }
+</li>
+</ul>
